@@ -1,0 +1,16 @@
+<h4>You're looking at <%= @post.title %></h4>
+<p>URL: <%= @post.url %></p>
+
+
+	
+	<%= form_for [@post, @comment] do |f| %>
+		<%= f.text_area :body %>
+		<br/>
+		<%= f.submit "Create Comment" %>
+	<% end %>
+
+	<h4>Comments:</h4>
+	<ul>
+		<% @post.comments.each do |comment| %>
+			<li><%= comment.body %></li>
+		<% end %>
