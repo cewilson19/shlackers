@@ -5,7 +5,9 @@
 		<li><%= link_to post.title, post_path(post)%><small>
 		<%= link_to 'link', fix_url(post.url) %></small>
 		post at <%= display_datetime(post.created_at) %>
+		<% if logged_in? %>
 		<%= link_to 'Edit', edit_post_path(post) %>
+		<% end %>
 	</li>
 	<% end %>
 </ul>

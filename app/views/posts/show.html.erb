@@ -2,15 +2,18 @@
 <p>URL: <%= @post.url %></p>
 
 
-	
+	<% if logged_in? %>
 	<%= form_for [@post, @comment] do |f| %>
 		<%= f.text_area :body %>
 		<br/>
 		<%= f.submit "Create Comment" %>
 	<% end %>
+	<% end %>
 
 	<h4>Comments:</h4>
 	<ul>
 		<% @post.comments.each do |comment| %>
-			<li><%= comment.body %></li>
+			<li><%= comment.body %> created by <%=comment.user %></li>
 		<% end %>
+
+	
