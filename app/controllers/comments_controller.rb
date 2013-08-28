@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
-  before_action :require_user
+  before_action :require_user, only: [:create, :vote]
+ 
+
   def create
    @post = Post.find(params[:post_id])
    @comment = Comment.new(params.require(:comment).permit(:body))
@@ -12,6 +14,11 @@ class CommentsController < ApplicationController
    else
    	render 'posts/show'
    end
+
+   def vote
+     Vote.create(voteable: @comment, creator: current_user, vote: params[:vote])
+      redirect_to comments_path
+   end 
 
   end
 
