@@ -37,8 +37,13 @@ class PostsController < ApplicationController
   def vote
     Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
     
+    respond_to do |format|
+      flash[:notice] = "your vote was counted"
+      redirect_to :back
+    end
 
     format.js 
+    
   end
 
   def update

@@ -7,12 +7,12 @@
 		<%= link_to '+', vote_post_path(post, vote: true), method: 'post', remote: true %>
 		<% end %>
 
-		<span id="post_<%post.id%>_votes"><%= post.total_votes %></span>
+		<span id="post_<%=post.id%>_votes"><%= post.total_votes %></span>
 
 		<% if logged_in? %>
 		<%= link_to '-', vote_post_path(post, vote: false), method: 'post', remote: true %>
 		<% end %>
-		<%= link_to post.title, post_path(post)%><small>
+		<%= link_to post.title, post_path(to_param)%><small>
 		<%= link_to 'link', fix_url(post.url) %></small>
 		post at <%= display_datetime(post.created_at) %>
 		<% if logged_in? %>
