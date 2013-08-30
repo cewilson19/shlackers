@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :logged_in?
   def current_user
-  	@curent_user ||= User.find(session[:user_id]) if session[:user_id]
+  	@curent_user ||= User.find_by(session[:user_id]) if session[:user_id]
   end
 
   def logged_in?
@@ -19,5 +19,13 @@ class ApplicationController < ActionController::Base
   	end
   end
 
-  
+  def access_denied
+    flash[:error] = "You don't have access to that (topsecret)"
+    redirect_to root_path
+  end
+
+  def require_admin
+    access_denied unless current_user && current_user.admin?
+  end
+
 end

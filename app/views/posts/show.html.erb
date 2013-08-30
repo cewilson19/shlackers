@@ -14,7 +14,7 @@
 	<ul>
 	
 		<% @post.comments.each do |comment| %>
-			<li><%= comment.body %> by <%= comment.creator.username %></li>
+			<li><%= comment.body %> by <i class="icon-user"></i> <%= comment.creator.username %></li>
 		<% end %>
 
 	

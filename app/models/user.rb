@@ -7,4 +7,17 @@ class User < ActiveRecord::Base;
 
 	validates :username, presence: true, uniqueness: true
 	validates :password, presence: true, on: :create, length: { minimum: 3}
+
+	def admin?
+		self.role == "admin"
+	end
+
+	def generate_slug
+		self.slug= self.title.gsub(" ","-").downcase
+	end
+
+	def to_param
+		self.slug
+	end
+
 end
